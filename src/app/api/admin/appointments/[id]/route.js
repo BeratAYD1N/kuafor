@@ -40,4 +40,6 @@ export async function PATCH(req, { params }) {
       { status: 500 }
     )
   }
-} 
+}
+
+export const dynamic = "force-dynamic" 

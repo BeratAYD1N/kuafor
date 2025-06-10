@@ -113,4 +113,6 @@ export async function DELETE(request) {
     console.error("Randevu silme hatası:", error)
     return NextResponse.json({ error: "Randevu silinemedi" }, { status: 500 })
   }
-} 
+}
+
+export const dynamic = "force-dynamic" 
