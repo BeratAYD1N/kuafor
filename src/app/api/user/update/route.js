@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { hash } from "bcrypt";
+import { hash, compare } from "bcryptjs";
 
 export async function PUT(request) {
   try {
@@ -31,10 +31,7 @@ export async function PUT(request) {
         select: { password: true },
       });
 
-      const isPasswordValid = await bcrypt.compare(
-        currentPassword,
-        user.password
-      );
+      const isPasswordValid = await compare(currentPassword, user.password);
 
       if (!isPasswordValid) {
         return NextResponse.json(

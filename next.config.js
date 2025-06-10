@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require("path")
 const nextConfig = {
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -10,6 +11,11 @@ const nextConfig = {
         os: false,
         path: false,
       }
+    }
+    // Alias '@' --> './src' böylece import '@/dosya' çalışır
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "@": path.resolve(__dirname, "src")
     }
     return config
   },
